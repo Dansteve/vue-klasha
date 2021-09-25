@@ -146,7 +146,7 @@ Please checkout [Klasha Documentation](https://documenter.getpostman.com/view/89
 
 ## Deployment
 
-REMEMBER TO CHANGE THE KEY WHEN DEPLOYING ON A LIVE/PRODUCTION SYSTEM
+REMEMBER TO CHANGE THE *merchantKey* WHEN DEPLOYING ON A LIVE/PRODUCTION SYSTEM
 
 ## Contributing
 
