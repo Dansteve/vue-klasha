@@ -1,0 +1,91 @@
+<html>
+
+<head>
+    <title>Vue PayStack Example</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="../dist/klasha.min.js"></script>
+    <style>
+    body {
+        font-size: 1em;
+        font-family: 'Tahoma', sans-serif;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <klasha
+          :is-test-mode="isTestMode"
+          :email="email"
+          :phone-number="phoneNumber"
+          :merchant-key="merchantKey"
+          :amount="amount"
+          :source-currency="sourceCurrency"
+          :destination-currency="destinationCurrency"
+          :tx-ref="txRef"
+          :business-id="businessId"
+          :fullname="fullname"
+          :payment-type="paymentType"
+          :payment-description="paymentDescription"
+          :call-back="callBack"
+          :on-close="onClose"
+          :embed="false"
+        />
+            <i class="fas fa-money-bill-alt"></i>
+            Make Payment
+        </klasha>
+    </div>
+
+    <script type="text/javascript">
+    new Vue({
+        el: '#app',
+        components:{
+          'klasha': VueKlasha.default
+        },
+        computed: {
+        },
+        methods: {
+          callBack: function(response){
+            console.log(response);
+          },
+          onClose: function(){
+            console.log("Payment closed");
+          }
+        },
+        // data: {
+        //   isTestMode : true,
+        //   email: 'danstevea@gmail.com',
+        //   phoneNumber: '+2348159991635',
+        //   merchantKey: 'GByi/gkhn5+BX4j6uI0lR7HCVo2NvTsVAQhyPko/uK4=',
+        //   amount: 1000,
+        //   sourceCurrency: '',
+        //   destinationCurrency: '',
+        //   txRef: '' + Math.floor((Math.random() * 1000000000) + 1),
+        //   businessId: '1',
+        //   fullname: 'Dansteve Adekanbi',
+        //   paymentDescription: '',
+        //   paymentType: '',
+        // }
+        data(){
+        return{
+            isTestMode : true,
+            email: 'danstevea@gmail.com',
+            phoneNumber: '+2348159991635',
+            merchantKey: 'GByi/gkhn5+BX4j6uI0lR7HCVo2NvTsVAQhyPko/uK4=',
+            amount: 1000,
+            sourceCurrency: '',
+            destinationCurrency: '',
+            txRef: '' + Math.floor((Math.random() * 1000000000) + 1),
+            businessId: '1',
+            fullname: 'Dansteve Adekanbi',
+            paymentDescription: '',
+            paymentType: '',
+        }
+    },
+    });
+    </script>
+</body>
+
+</html>
