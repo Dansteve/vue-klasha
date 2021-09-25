@@ -140,6 +140,26 @@ new Vue({
     });
 ```
 
+### Styling button
+
+Add style call klashaPayButtonStyle
+
+``` html
+<style>
+    .klashaPayButtonStyle{
+        background-color: #4CAF50; /* Green */
+        border-radius: 20px;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+</style>
+
+```
+
 [Usage Example via CDN](examples/index.html)
 
 Please checkout [Klasha Documentation](https://documenter.getpostman.com/view/8963555/TzJoFgHh) for other available options you can add to the
