@@ -65,7 +65,7 @@ export default {
             email: 'some data',
             phoneNumber: 'some phoneNumber',
             merchantKey: 'your merchantKey',
-            amount: 1000 // in kobo,
+            amount: 1000, // in kobo
             sourceCurrency: '' || 'NGN',
             destinationCurrency: '' || 'NGN',,
             txRef: '' + this.makeId(16),
@@ -128,7 +128,7 @@ new Vue({
           email: 'some data',
           phoneNumber: 'some phoneNumber',
           merchantKey: 'your merchantKey',
-          amount: 1000 // in kobo,
+          amount: 1000, // in kobo
           sourceCurrency: '' || 'NGN',
           destinationCurrency: '' || 'NGN',,
           txRef: '' + this.makeId(16),
@@ -163,6 +163,7 @@ Why not star the github repo? I'd love the attention! Why not share the link for
 Don't forget to [follow me on twitter](https://twitter.com/dansteveade)!
 
 Thanks!
+
 Dansteve Adekanbi.
 
 ## License
