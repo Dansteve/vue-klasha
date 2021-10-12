@@ -1,6 +1,6 @@
 {
   "name": "vue-klasha",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Vue Klasha Component for Vue 2.x.",
   "main": "dist/klasha.min.js",
   "scripts": {
@@ -18,7 +18,7 @@
     "src"
   ],
   "keywords": [
-    "PayStack",
+    "Klasha",
     "Vue",
     "Vuejs",
     "Vue 2",
