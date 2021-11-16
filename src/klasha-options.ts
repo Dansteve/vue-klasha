@@ -86,6 +86,14 @@ export interface KlashaKitOptions {
    */
   paymentType?: string;
   /**
+   * The subscription payment plan key
+   */
+  paymentPlan?: string;
+  /**
+   * Should be set to true for subscription payments.
+   */
+  rememberMe?: boolean;
+  /**
    * The callBack function.
    */
   callBack?: any;
