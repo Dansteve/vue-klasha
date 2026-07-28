@@ -1,4 +1,7 @@
 node_modules
 npm-debug.log
 .idea
-package-lock.json
+.DS_Store
+coverage
+.dev-dist
+*.tgz
