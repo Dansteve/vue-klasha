@@ -1,15 +1,28 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+    <meta charset="utf-8">
     <title>Vue Klasha Example</title>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- Vue 2 -->
+    <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+    <!-- vue-klasha (UMD build) -->
     <script src="../dist/klasha.min.js"></script>
     <style>
     body {
         font-size: 1em;
         font-family: 'Tahoma', sans-serif;
+    }
+    .klashaPayButtonStyle {
+        background-color: #4CAF50;
+        border-radius: 20px;
+        border: 0;
+        color: white;
+        cursor: pointer;
+        padding: 15px 32px;
+        font-size: 16px;
     }
     </style>
 </head>
@@ -30,9 +43,9 @@
           :payment-type="paymentType"
           :payment-description="paymentDescription"
           :call-back="callBack"
-          :on-close="onClose"
           :embed="false"
-        />
+          @error="onError"
+        >
             <i class="fas fa-money-bill-alt"></i>
             Make Payment
         </klasha>
@@ -41,49 +54,37 @@
     <script type="text/javascript">
     new Vue({
         el: '#app',
-        components:{
-          'klasha': VueKlasha.default
+        components: {
+            // The UMD bundle exposes the component as VueKlasha.default
+            klasha: VueKlasha.default
         },
-        computed: {
+        data: function () {
+            return {
+                // true  -> Klasha sandbox
+                // false -> LIVE gateway, real money
+                isTestMode: true,
+                email: 'buyer@example.com',
+                phoneNumber: '+2348159991635',
+                // Replace with your own key from the Klasha dashboard.
+                merchantKey: 'YOUR_TEST_MERCHANT_KEY',
+                amount: 1000,
+                sourceCurrency: 'NGN',
+                destinationCurrency: 'NGN',
+                txRef: 'DEMO-' + Date.now(),
+                businessId: '1',
+                fullname: 'Ada Lovelace',
+                paymentDescription: '',
+                paymentType: ''
+            };
         },
         methods: {
-          callBack: function(response){
-            console.log(response);
-          },
-          onClose: function(){
-            console.log("Payment closed");
-          }
-        },
-        // data: {
-        //   isTestMode : true,
-        //   email: 'danstevea@gmail.com',
-        //   phoneNumber: '+2348159991635',
-        //   merchantKey: 'GByi/gkhn5+BX4j6uI0lR7HCVo2NvTsVAQhyPko/uK4=',
-        //   amount: 1000,
-        //   sourceCurrency: '',
-        //   destinationCurrency: '',
-        //   txRef: '' + Math.floor((Math.random() * 1000000000) + 1),
-        //   businessId: '1',
-        //   fullname: 'Dansteve Adekanbi',
-        //   paymentDescription: '',
-        //   paymentType: '',
-        // }
-        data(){
-        return{
-            isTestMode : true,
-            email: 'danstevea@gmail.com',
-            phoneNumber: '+2348159991635',
-            merchantKey: 'GByi/gkhn5+BX4j6uI0lR7HCVo2NvTsVAQhyPko/uK4=',
-            amount: 1000,
-            sourceCurrency: '',
-            destinationCurrency: '',
-            txRef: '' + Math.floor((Math.random() * 1000000000) + 1),
-            businessId: '1',
-            fullname: 'Dansteve Adekanbi',
-            paymentDescription: '',
-            paymentType: '',
+            callBack: function (response) {
+                window.alert('Klasha response: ' + JSON.stringify(response));
+            },
+            onError: function (error) {
+                window.alert('Klasha error: ' + error.message);
+            }
         }
-    },
     });
     </script>
 </body>

@@ -1,13 +1,32 @@
 {
   "name": "vue-klasha",
-  "version": "0.0.4",
-  "description": "Vue Klasha Component for Vue 2.x.",
+  "version": "1.0.0",
+  "description": "Klasha payment gateway component for Vue 2.x. For Vue 3 use vue3-klasha.",
   "main": "dist/klasha.min.js",
+  "module": "dist/klasha.esm.js",
+  "unpkg": "dist/klasha.min.js",
+  "jsdelivr": "dist/klasha.min.js",
+  "types": "src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./dist/klasha.esm.js",
+      "require": "./dist/klasha.min.js",
+      "default": "./dist/klasha.min.js"
+    },
+    "./dist/*": "./dist/*",
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
   "scripts": {
-    "lint": "eslint src --ext=js,vue  || exit 0",
-    "lint:fix": "eslint src --ext=js,vue --fix  || exit 0",
-    "dev": "webpack-dev-server --content-base ./examples/commonjs --env=webpack.dev --open --hot",
-    "dist": "webpack --env=webpack.dist"
+    "lint": "eslint src --ext=js,vue",
+    "lint:fix": "eslint src --ext=js,vue --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "dev": "webpack serve --config build/webpack.dev.js",
+    "build": "webpack --config build/webpack.dist.js",
+    "dist": "npm run build",
+    "prepublishOnly": "npm run lint && npm test && npm run build"
   },
   "repository": {
     "type": "git",
@@ -22,33 +41,42 @@
     "Vue",
     "Vuejs",
     "Vue 2",
-    "Payment Gateway"
+    "Payment Gateway",
+    "Payments",
+    "Africa"
   ],
-  "author": "Dansteve Adekanbi",
+  "author": {
+    "name": "Dansteve Adekanbi",
+    "email": "danstevea@gmail.com",
+    "url": "https://dansteve.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/dansteve/vue-klasha/issues"
   },
-  "homepage": "",
-  "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.3.4",
-    "@babel/preset-env": "^7.3.4",
-    "babel-loader": "^8.0.5",
-    "css-loader": "^2.1.0",
-    "eslint-config-vue": "^2.0.2",
-    "eslint-loader": "^2.1.2",
-    "eslint-plugin-vue": "^5.2.2",
-    "standard": "^12.0.1",
-    "uglifyjs-webpack-plugin": "^2.1.2",
-    "vue": "^2.6.7",
-    "vue-loader": "^15.6.4",
-    "vue-template-compiler": "^2.6.7",
-    "webpack": "^4.29.6",
-    "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.2.1"
+  "homepage": "https://github.com/dansteve/vue-klasha#readme",
+  "peerDependencies": {
+    "vue": "^2.6.0"
   },
-  "dependencies": {
-    "vue": "^2.6.7"
+  "devDependencies": {
+    "@babel/core": "^7.24.0",
+    "@babel/preset-env": "^7.24.0",
+    "@vue/test-utils": "^1.3.6",
+    "@vue/vue2-jest": "^29.2.6",
+    "babel-jest": "^29.7.0",
+    "babel-loader": "^9.1.3",
+    "css-loader": "^6.10.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.23.0",
+    "eslint-webpack-plugin": "^4.1.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "vue": "^2.7.16",
+    "vue-loader": "^15.11.1",
+    "vue-style-loader": "^4.1.3",
+    "vue-template-compiler": "^2.7.16",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.2"
   }
 }

@@ -1,11 +1,11 @@
 <template>
   <div class="App">
-    <div 
-      id="container" 
+    <div
+      id="container"
       class="ion-text-center"
     >
-      <p><strong class="padding">Welcome to Dansteve Adekanbi</strong></p>
-      <p><strong class="padding">Vue-Klasha package testing</strong></p>
+      <p><strong class="padding">vue-klasha</strong></p>
+      <p><strong class="padding">Vue 2 component for the Klasha payment gateway</strong></p>
       <br>
       <div class="margin">
         <klasha
@@ -22,8 +22,9 @@
           :payment-type="paymentType"
           :payment-description="paymentDescription"
           :call-back="callBack"
-          :on-close="onClose"
           :embed="false"
+          @error="onError"
+          @tx-ref="onGeneratedTxRef"
         >
           <div>Pay me, My Money</div>
         </klasha>
@@ -34,13 +35,16 @@
         class="margin"
       >
         <div>Payment Data</div>
-        <div  
-          class="margin"
-        >
-          <code>
-            {{ paymentData }}
-          </code>
+        <div class="margin">
+          <code>{{ paymentData }}</code>
         </div>
+      </div>
+
+      <div
+        v-if="error"
+        class="margin"
+      >
+        <code>{{ error }}</code>
       </div>
     </div>
   </div>
@@ -48,58 +52,46 @@
 
 <script type="text/javascript">
 import klasha from '../../src';
+
 export default {
     components: {
         klasha
     },
-    data(){
-        return{
-            isTestMode : true,
-            email: 'danstevea@gmail.com',
+    data() {
+        return {
+            // true  -> Klasha sandbox
+            // false -> LIVE gateway, real money
+            isTestMode: true,
+            email: 'buyer@example.com',
             phoneNumber: '+2348159991635',
-            merchantKey: 'GByi/gkhn5+BX4j6uI0lR7HCVo2NvTsVAQhyPko/uK4=',
+            // Replace with your own key from the Klasha dashboard.
+            merchantKey: 'YOUR_TEST_MERCHANT_KEY',
             amount: 1000,
-            sourceCurrency: '',
-            destinationCurrency: '',
-            txRef: '' + this.makeId(16),
+            sourceCurrency: 'NGN',
+            destinationCurrency: 'NGN',
+            txRef: 'DEMO-' + Date.now(),
             businessId: '1',
-            fullname: 'Dansteve Adekanbi',
+            fullname: 'Ada Lovelace',
             paymentDescription: '',
             paymentType: '',
-            paymentData : {}
-        }
-    },
-    computed: {
-        
+            paymentData: null,
+            error: null
+        };
     },
     methods: {
-        makeId(length) {
-            let result = '';
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            const charactersLength = characters.length;
-            for (let i = 0; i < length; i++) {
-                result += characters.charAt(Math.floor(Math.random() * charactersLength));
-            }
-            return result;
-        },
-        callBack: function(response){
-            console.log(response)
+        callBack(response) {
             this.paymentData = response;
         },
-        onClose: function(){
-            console.log("Payment closed")
+        onError(error) {
+            this.error = error.message;
+        },
+        onGeneratedTxRef(txRef) {
+            this.txRef = txRef;
         }
     }
-}
+};
 </script>
 <style>
-    .App {
-        /* text-align: center;
-        margin: auto;
-        width: 50%;
-        padding: 10px; */
-    }
-
     .App-intro {
         font-size: large;
     }
@@ -107,6 +99,8 @@ export default {
         background-color: #4CAF50; /* Green */
         border-radius: 20px;
         color: white;
+        border: 0;
+        cursor: pointer;
         padding: 15px 32px;
         text-align: center;
         text-decoration: none;
@@ -147,11 +141,10 @@ export default {
     }
 
     code {
-        font-family: Consolas,"courier new";
+        font-family: Consolas, "courier new";
         font-family: monospace;
         background-color: #f1f1f1;
         padding: 20px;
         font-size: 105%;
     }
-
 </style>
